@@ -1,0 +1,74 @@
+//new database called CompanyDB.
+
+test> use CompanyDB
+switched to db CompanyDB
+
+// collection named Employees and Insert one employee record using insertOne()
+
+CompanyDB>  db.Employees.insertOne({name: "Ravi Kumar",age: 28,isActive: true,salary : 45000.50,skills : ["JavaScript","Node.js","MongoDB"], contact : {email : "ravi@eample.com" , phone : "9876543210"} , joinedDate : 21-09-2025 , managerAssigned : null})
+{
+  acknowledged: true,
+  insertedId: ObjectId('68d02933d25724099dcebea4')
+}
+
+//using insertMany() with sample data 
+
+CompanyDB>  db.Employees.insertMany([{name: "Anjali Sharma",age: 25,isActive: true,salary : 38000,skills : ["Html","CSS","React"], contact : {email : "anjali@eample.com" , phone : "9876545720"} , joinedDate : 22-09-2025 , managerAssigned : null},{name:"Vikram",age: 32,isActive : false , salary : 52000.75, skills :["Java","MySQL","C"], contact : {email : "vikram@eample",phone : "9785463210"},joinedDate : 23-09-2025, managerAssigned : null},{name : "Neha Verma", age :29,isActive : true, salary:47000,skills :["python","Java","C++"],contact :{ email :"neha@eample.com",phone : "7845129630"}, joinedDate : 24-09-2025, managerAssigned : null}])
+{
+  acknowledged: true,
+  insertedIds: {
+    '0': ObjectId('68d02dbbd25724099dcebea5'),
+    '1': ObjectId('68d02dbbd25724099dcebea6'),
+    '2': ObjectId('68d02dbbd25724099dcebea7')
+  }
+}
+
+//using find()
+
+CompanyDB> db.Employees.find()
+[
+  {
+    _id: ObjectId('68d02933d25724099dcebea4'),
+    name: 'Ravi Kumar',
+    age: 28,
+    isActive: true,
+    salary: 45000.5,
+    skills: [ 'JavaScript', 'Node.js', 'MongoDB' ],
+    contact: { email: 'ravi@eample.com', phone: '9876543210' },
+    joinedDate: -2013,
+    managerAssigned: null
+  },
+  {
+    _id: ObjectId('68d02dbbd25724099dcebea5'),
+    name: 'Anjali Sharma',
+    age: 25,
+    isActive: true,
+    salary: 38000,
+    skills: [ 'Html', 'CSS', 'React' ],
+    contact: { email: 'anjali@eample.com', phone: '9876545720' },
+    joinedDate: -2012,
+    managerAssigned: null
+  },
+  {
+    _id: ObjectId('68d02dbbd25724099dcebea6'),
+    name: 'Vikram',
+    age: 32,
+    isActive: false,
+    salary: 52000.75,
+    skills: [ 'Java', 'MySQL', 'C' ],
+    contact: { email: 'vikram@eample', phone: '9785463210' },
+    joinedDate: -2011,
+    managerAssigned: null
+  },
+  {
+    _id: ObjectId('68d02dbbd25724099dcebea7'),
+    name: 'Neha Verma',
+    age: 29,
+    isActive: true,
+    salary: 47000,
+    skills: [ 'python', 'Java', 'C++' ],
+    contact: { email: 'neha@eample.com', phone: '7845129630' },
+    joinedDate: -2010,
+    managerAssigned: null
+  }
+]
