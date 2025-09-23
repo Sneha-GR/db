@@ -116,4 +116,201 @@ Library> db.Books.find()
   }
 ]
 
-//
+//Display all books published after the year 2010
+
+Library> db.Books.find({year :{$gt : 2010}})
+[
+  {
+    _id: ObjectId('68d22914dec014b477cebea5'),
+    title: 'Data Structures',
+    author: 'John Smith',
+    year: 2015,
+    copies: 3,
+    available: true
+  },
+  {
+    _id: ObjectId('68d22914dec014b477cebea6'),
+    title: 'Modern JavaScript',
+    author: 'Emily Brown',
+    year: 2020,
+    copies: 4,
+    available: false
+  },
+  {
+    _id: ObjectId('68d22914dec014b477cebeab'),
+    title: 'Sapiens',
+    author: 'Yuval Noah Harari',
+    year: 2014,
+    copies: 7,
+    available: true
+  }
+]
+
+//Library> db.Books.findOne({author :"Jane Austen"})
+{
+  _id: ObjectId('68d22914dec014b477cebea4'),
+  title: 'Pride and Prejudice',
+  author: 'Jane Austen',
+  year: 1813,
+  copies: 8,
+  available: true
+}
+
+//all books that have more than 5 copies available and were published on or before 2000
+
+Library> db.Books.find({$and :[{copies : {$gt : 5}},{year : {$lte : 2000}}]})
+[
+  {
+    _id: ObjectId('68d22914dec014b477cebea4'),
+    title: 'Pride and Prejudice',
+    author: 'Jane Austen',
+    year: 1813,
+    copies: 8,
+    available: true
+  },
+  {
+    _id: ObjectId('68d22914dec014b477cebea7'),
+    title: 'The Great Gatsby',
+    author: 'F. Scott Fitzgerald',
+    year: 1925,
+    copies: 6,
+    available: true
+  },
+  {
+    _id: ObjectId('68d22914dec014b477cebea8'),
+    title: 'To Kill a Mockingbird',
+    author: 'Harper Lee',
+    year: 1960,
+    copies: 10,
+    available: true
+  }
+]
+
+//all books that either have fewer than 3 copies or are not currently available.
+
+Library> db.Books.find({$or :[{copies : {$gt : 3}},{available : false}]})
+[
+  {
+    _id: ObjectId('68d22914dec014b477cebea4'),
+    title: 'Pride and Prejudice',
+    author: 'Jane Austen',
+    year: 1813,
+    copies: 8,
+    available: true
+  },
+  {
+    _id: ObjectId('68d22914dec014b477cebea6'),
+    title: 'Modern JavaScript',
+    author: 'Emily Brown',
+    year: 2020,
+    copies: 4,
+    available: false
+  },
+  {
+    _id: ObjectId('68d22914dec014b477cebea7'),
+    title: 'The Great Gatsby',
+    author: 'F. Scott Fitzgerald',
+    year: 1925,
+    copies: 6,
+    available: true
+  },
+  {
+    _id: ObjectId('68d22914dec014b477cebea8'),
+    title: 'To Kill a Mockingbird',
+    author: 'Harper Lee',
+    year: 1960,
+    copies: 10,
+    available: true
+  },
+  {
+    _id: ObjectId('68d22914dec014b477cebea9'),
+    title: 'A Brief History of Time',
+    author: 'Stephen Hawking',
+    year: 1988,
+    copies: 2,
+    available: false
+  },
+  {
+    _id: ObjectId('68d22914dec014b477cebeaa'),
+    title: 'The C Programming Language',
+    author: 'Unknown',
+    year: 1978,
+    copies: 5,
+    available: true
+  },
+  {
+    _id: ObjectId('68d22914dec014b477cebeab'),
+    title: 'Sapiens',
+    author: 'Yuval Noah Harari',
+    year: 2014,
+    copies: 7,
+    available: true
+  },
+  {
+    _id: ObjectId('68d22914dec014b477cebeac'),
+    title: 'The Alchemist',
+    author: 'Paulo Coelho',
+    year: 1988,
+    copies: 1,
+    available: false
+  },
+  {
+    _id: ObjectId('68d22914dec014b477cebead'),
+    title: 'Dune',
+    author: 'Frank Herbert',
+    year: 1965,
+    copies: 4,
+    available: true
+  }
+]
+
+//Update the number of copies of the book titled "Data Structures" to 10 using the update() method.
+
+Library>  db.Clothes.update({title :"Data Structures"},{$set : {copies : 10}})
+DeprecationWarning: Collection.update() is deprecated. Use updateOne, updateMany, or bulkWrite.
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 0,
+  modifiedCount: 0,
+  upsertedCount: 0
+}
+Library> db.Books.find({title :"Data Structures"})
+[
+  {
+    _id: ObjectId('68d22914dec014b477cebea5'),
+    title: 'Data Structures',
+    author: 'John Smith',
+    year: 2015,
+    copies: 3,
+    available: true
+  }
+]
+
+//Change the availability of the book titled "Modern JavaScript" to true 
+
+Library>  db.Clothes.update({title :"Modern JavaScript"},{$set : {available : true}})
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 0,
+  modifiedCount: 0,
+  upsertedCount: 0
+}
+Library> db.Books.find({title : "Modern JavaScript"})
+[
+  {
+    _id: ObjectId('68d22914dec014b477cebea6'),
+    title: 'Modern JavaScript',
+    author: 'Emily Brown',
+    year: 2020,
+    copies: 4,
+    available: false
+  }
+]
+
+//Remove one book where the author is "Unknown".
+
+Library> db.Books.remove({author : "Unknown"},1)
+DeprecationWarning: Collection.remove() is deprecated. Use deleteOne, deleteMany, findOneAndDelete, or bulkWrite.
+{ acknowledged: true, deletedCount: 1 }
