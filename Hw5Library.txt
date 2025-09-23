@@ -1,0 +1,119 @@
+//database for a library
+
+test> use Library
+switched to db Library
+
+//collection called Books
+
+Library> db.Books.insertMany([
+...     { title: "Pride and Prejudice", author: "Jane Austen", year: 1813, copies: 8, available: true },
+...     { title: "Data Structures", author: "John Smith", year: 2015, copies: 3, available: true },
+...     { title: "Modern JavaScript", author: "Emily Brown", year: 2020, copies: 4, available: false },
+...     { title: "The Great Gatsby", author: "F. Scott Fitzgerald", year: 1925, copies: 6, available: true },
+...     { title: "To Kill a Mockingbird", author: "Harper Lee", year: 1960, copies: 10, available: true },
+...     { title: "A Brief History of Time", author: "Stephen Hawking", year: 1988, copies: 2, available: false },
+...     { title: "The C Programming Language", author: "Unknown", year: 1978, copies: 5, available: true },
+...     { title: "Sapiens", author: "Yuval Noah Harari", year: 2014, copies: 7, available: true },
+...     { title: "The Alchemist", author: "Paulo Coelho", year: 1988, copies: 1, available: false },
+...     { title: "Dune", author: "Frank Herbert", year: 1965, copiecopies: 4, available: true }
+... ])
+{
+  acknowledged: true,
+  insertedIds: {
+    '0': ObjectId('68d22914dec014b477cebea4'),
+    '1': ObjectId('68d22914dec014b477cebea5'),
+    '2': ObjectId('68d22914dec014b477cebea6'),
+    '3': ObjectId('68d22914dec014b477cebea7'),
+    '4': ObjectId('68d22914dec014b477cebea8'),
+    '5': ObjectId('68d22914dec014b477cebea9'),
+    '6': ObjectId('68d22914dec014b477cebeaa'),
+    '7': ObjectId('68d22914dec014b477cebeab'),
+    '8': ObjectId('68d22914dec014b477cebeac'),
+    '9': ObjectId('68d22914dec014b477cebead')
+  }
+}
+Library> db.Books.find()
+[
+  {
+    _id: ObjectId('68d22914dec014b477cebea4'),
+    title: 'Pride and Prejudice',
+    author: 'Jane Austen',
+    year: 1813,
+    copies: 8,
+    available: true
+  },
+  {
+    _id: ObjectId('68d22914dec014b477cebea5'),
+    title: 'Data Structures',
+    author: 'John Smith',
+    year: 2015,
+    copies: 3,
+    available: true
+  },
+  {
+    _id: ObjectId('68d22914dec014b477cebea6'),
+    title: 'Modern JavaScript',
+    author: 'Emily Brown',
+    year: 2020,
+    copies: 4,
+    available: false
+  },
+  {
+    _id: ObjectId('68d22914dec014b477cebea7'),
+    title: 'The Great Gatsby',
+    author: 'F. Scott Fitzgerald',
+    year: 1925,
+    copies: 6,
+    available: true
+  },
+  {
+    _id: ObjectId('68d22914dec014b477cebea8'),
+    title: 'To Kill a Mockingbird',
+    author: 'Harper Lee',
+    year: 1960,
+    copies: 10,
+    available: true
+  },
+  {
+    _id: ObjectId('68d22914dec014b477cebea9'),
+    title: 'A Brief History of Time',
+    author: 'Stephen Hawking',
+    year: 1988,
+    copies: 2,
+    available: false
+  },
+  {
+    _id: ObjectId('68d22914dec014b477cebeaa'),
+    title: 'The C Programming Language',
+    author: 'Unknown',
+    year: 1978,
+    copies: 5,
+    available: true
+  },
+  {
+    _id: ObjectId('68d22914dec014b477cebeab'),
+    title: 'Sapiens',
+    author: 'Yuval Noah Harari',
+    year: 2014,
+    copies: 7,
+    available: true
+  },
+  {
+    _id: ObjectId('68d22914dec014b477cebeac'),
+    title: 'The Alchemist',
+    author: 'Paulo Coelho',
+    year: 1988,
+    copies: 1,
+    available: false
+  },
+  {
+    _id: ObjectId('68d22914dec014b477cebead'),
+    title: 'Dune',
+    author: 'Frank Herbert',
+    year: 1965,
+    copies: 4,
+    available: true
+  }
+]
+
+//
