@@ -1,0 +1,183 @@
+//database created
+
+test> use Store
+switched to db Store
+
+Store> db.books.insertMany([
+...     { title: "The Great Gatsby", author: "F. Scott Fitzgerald", price: 12.99, rating: 4.3, genre: "Fiction" },
+...     { title: "1984", author: "George Orwell", price: 9.99, rating: 4.8, gegenre: "Dystopian" },
+...     { title: "Pride and Prejudice", author: "Jane Austen", price: 7.99, rarating: 4.6, genre: "Romance" },
+...     { title: "The Hobbit", author: "J.R.R. Tolkien", price: 14.99, rating: 4.9, genre: "Fantasy" },
+...     { title: "Sapiens", author: "Yuval Noah Harari", price: 18.99, rating: 4.7, genre: "Non-Fiction" },
+...     { title: "The Da Vinci Code", author: "Dan Brown", price: 11.99, ratinrating: 4.2, genre: "Mystery" },
+...     { title: "Dune", author: "Frank Herbert", price: 15.99, rating: 4.8, ggenre: "Science Fiction" },
+...     { title: "The Alchemist", author: "Paulo Coelho", price: 10.99, ratingrating: 4.4, genre: "Fiction" },
+...     { title: "Educated", author: "Tara Westover", price: 13.99, rating: 4.7, genre: "Non-Fiction" },
+...     { title: "The Night Circus", author: "Erin Morgenstern", price: 16.99, rating: 4.5, genre: "Fantasy" }
+... ])
+{
+  acknowledged: true,
+  insertedIds: {
+    '0': ObjectId('68d57223b102a54c90cebeae'),
+    '1': ObjectId('68d57223b102a54c90cebeaf'),
+    '2': ObjectId('68d57223b102a54c90cebeb0'),
+    '3': ObjectId('68d57223b102a54c90cebeb1'),
+    '4': ObjectId('68d57223b102a54c90cebeb2'),
+    '5': ObjectId('68d57223b102a54c90cebeb3'),
+    '6': ObjectId('68d57223b102a54c90cebeb4'),
+    '7': ObjectId('68d57223b102a54c90cebeb5'),
+    '8': ObjectId('68d57223b102a54c90cebeb6'),
+    '9': ObjectId('68d57223b102a54c90cebeb7')
+  }
+}
+
+//display the collection
+
+Store> db.books.find()
+[
+  {
+    _id: ObjectId('68d57223b102a54c90cebeae'),
+    title: 'The Great Gatsby',
+    author: 'F. Scott Fitzgerald',
+    price: 12.99,
+    rating: 4.3,
+    genre: 'Fiction'
+  },
+  {
+    _id: ObjectId('68d57223b102a54c90cebeaf'),
+    title: '1984',
+    author: 'George Orwell',
+    price: 9.99,
+    rating: 4.8,
+    genre: 'Dystopian'
+  },
+  {
+    _id: ObjectId('68d57223b102a54c90cebeb0'),
+    title: 'Pride and Prejudice',
+    author: 'Jane Austen',
+    price: 7.99,
+    rating: 4.6,
+    genre: 'Romance'
+  },
+  {
+    _id: ObjectId('68d57223b102a54c90cebeb1'),
+    title: 'The Hobbit',
+    author: 'J.R.R. Tolkien',
+    price: 14.99,
+    rating: 4.9,
+    genre: 'Fantasy'
+  },
+  {
+    _id: ObjectId('68d57223b102a54c90cebeb2'),
+    title: 'Sapiens',
+    author: 'Yuval Noah Harari',
+    price: 18.99,
+    rating: 4.7,
+    genre: 'Non-Fiction'
+  },
+  {
+    _id: ObjectId('68d57223b102a54c90cebeb3'),
+    title: 'The Da Vinci Code',
+    author: 'Dan Brown',
+    price: 11.99,
+    rating: 4.2,
+    genre: 'Mystery'
+  },
+  {
+    _id: ObjectId('68d57223b102a54c90cebeb4'),
+    title: 'Dune',
+    author: 'Frank Herbert',
+    price: 15.99,
+    rating: 4.8,
+    genre: 'Science Fiction'
+  },
+  {
+    _id: ObjectId('68d57223b102a54c90cebeb5'),
+    title: 'The Alchemist',
+    author: 'Paulo Coelho',
+    price: 10.99,
+    rating: 4.4,
+    genre: 'Fiction'
+  },
+  {
+    _id: ObjectId('68d57223b102a54c90cebeb6'),
+    title: 'Educated',
+    author: 'Tara Westover',
+    price: 13.99,
+    rating: 4.7,
+    genre: 'Non-Fiction'
+  },
+  {
+    _id: ObjectId('68d57223b102a54c90cebeb7'),
+    title: 'The Night Circus',
+    author: 'Erin Morgenstern',
+    price: 16.99,
+    rating: 4.5,
+    genre: 'Fantasy'
+  }
+]
+
+//Write a query to list only the title and author of all books, hiding the _id.
+
+Store> db.books.find({},{ _id: 0, title: 1, author: 1 })
+[
+  { title: 'The Great Gatsby', author: 'F. Scott Fitzgerald' },
+  { title: '1984', author: 'George Orwell' },
+  { title: 'Pride and Prejudice', author: 'Jane Austen' },
+  { title: 'The Hobbit', author: 'J.R.R. Tolkien' },
+  { title: 'Sapiens', author: 'Yuval Noah Harari' },
+  { title: 'The Da Vinci Code', author: 'Dan Brown' },
+  { title: 'Dune', author: 'Frank Herbert' },
+  { title: 'The Alchemist', author: 'Paulo Coelho' },
+  { title: 'Educated', author: 'Tara Westover' },
+  { title: 'The Night Circus', author: 'Erin Morgenstern' }
+]
+
+//Find the top 5 books with the highest rating, showing their title, author, and rating.
+
+Store> db.books.find({},{ _id: 0, title: 1, author: 1, rating: 1 }).sort({ rating: -1 }).limit(5)
+[
+  { title: 'The Hobbit', author: 'J.R.R. Tolkien', rating: 4.9 },
+  { title: 'Dune', author: 'Frank Herbert', rating: 4.8 },
+  { title: '1984', author: 'George Orwell', rating: 4.8 },
+  { title: 'Educated', author: 'Tara Westover', rating: 4.7 },
+  { title: 'Sapiens', author: 'Yuval Noah Harari', rating: 4.7 }
+]
+
+//Skip the first 3 books sorted by price (lowest to highest), and show the next 4 books with only their title and price.
+
+Store> db.books.find({},{ _id: 0, title: 1, price: 1 }).sort({ price: 1 }).skip(3).limit(4)
+[
+  { title: 'The Da Vinci Code', price: 11.99 },
+  { title: 'The Great Gatsby', price: 12.99 },
+  { title: 'Educated', price: 13.99 },
+  { title: 'The Hobbit', price: 14.99 }
+]
+
+//Find all unique genres available in the bookstore
+
+Store> db.books.distinct("genre")
+[
+  'Dystopian',
+  'Fantasy',
+  'Fiction',
+  'Mystery',
+  'Non-Fiction',
+  'Romance',
+  'Science Fiction'
+]
+
+//Use a simple map-reduce function to calculate the total number of books for each genre
+
+Store> db.books.mapReduce( function() { emit(this.genre, 1); }, function(key, values) { return Array.sum(values); }, { out: "genre_counts" })
+{ result: 'genre_counts', ok: 1 }
+Store> db.genre_counts.find()
+[
+  { _id: 'Fantasy', value: 2 },
+  { _id: 'Dystopian', value: 1 },
+  { _id: 'Fiction', value: 2 },
+  { _id: 'Romance', value: 1 },
+  { _id: 'Non-Fiction', value: 2 },
+  { _id: 'Mystery', value: 1 },
+  { _id: 'Science Fiction', value: 1 }
+]
