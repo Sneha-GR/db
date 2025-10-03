@@ -1,0 +1,152 @@
+//small online store that keeps track of product listings in a MongoDB collection called products.
+
+OnlineStore> use SampleStore
+switched to db SampleStore
+SampleStore> db.products.insertMany([
+...   {
+...     name: "Laptop",
+...     category: "Electronics",
+...     price: 800,
+...     stock: 15
+...   },
+...   {
+...     name: "Smartphone",
+...     category: "Electronics",
+...     price: 500,
+...     stock: 30
+...   },
+...   {
+...     name: "Washing Machine",
+...     category: "Home Appliances",
+...     price: 300,
+...     stock: 10
+...   },
+...   {
+...     name: "Office Chair",
+...     category: "Furniture",
+...     price: 120,
+...     stock: 25
+...   },
+...   {
+...     name: "Headphones",
+...     category: "Accessories",
+...     price: 60,
+...     stock: 50
+...   }
+... ]);
+...
+{
+  acknowledged: true,
+  insertedIds: {
+    '0': ObjectId('68df5d37bcb0a01d65cebeae'),
+    '1': ObjectId('68df5d37bcb0a01d65cebeaf'),
+    '2': ObjectId('68df5d37bcb0a01d65cebeb0'),
+    '3': ObjectId('68df5d37bcb0a01d65cebeb1'),
+    '4': ObjectId('68df5d37bcb0a01d65cebeb2')
+  }
+}
+SampleStore> db.products.find()
+[
+  {
+    _id: ObjectId('68df5d37bcb0a01d65cebeae'),
+    name: 'Laptop',
+    category: 'Electronics',
+    price: 800,
+    stock: 15
+  },
+  {
+    _id: ObjectId('68df5d37bcb0a01d65cebeaf'),
+    name: 'Smartphone',
+    category: 'Electronics',
+    price: 500,
+    stock: 30
+  },
+  {
+    _id: ObjectId('68df5d37bcb0a01d65cebeb0'),
+    name: 'Washing Machine',
+    category: 'Home Appliances',
+    price: 300,
+    stock: 10
+  },
+  {
+    _id: ObjectId('68df5d37bcb0a01d65cebeb1'),
+    name: 'Office Chair',
+    category: 'Furniture',
+    price: 120,
+    stock: 25
+  },
+  {
+    _id: ObjectId('68df5d37bcb0a01d65cebeb2'),
+    name: 'Headphones',
+    category: 'Accessories',
+    price: 60,
+    stock: 50
+  }
+]
+
+//Create an index on the category field to help quickly filter products by their category.
+
+SampleStore> db.products.createIndex({category : 1})
+category_1
+
+//Create an index on the price field in descending order to allow sorting the most expensive products first.
+
+SampleStore> db.products.createIndex({price : -1})
+price_-1
+SampleStore> db.products.find()
+[
+  {
+    _id: ObjectId('68df5d37bcb0a01d65cebeae'),
+    name: 'Laptop',
+    category: 'Electronics',
+    price: 800,
+    stock: 15
+  },
+  {
+    _id: ObjectId('68df5d37bcb0a01d65cebeaf'),
+    name: 'Smartphone',
+    category: 'Electronics',
+    price: 500,
+    stock: 30
+  },
+  {
+    _id: ObjectId('68df5d37bcb0a01d65cebeb0'),
+    name: 'Washing Machine',
+    category: 'Home Appliances',
+    price: 300,
+    stock: 10
+  },
+  {
+    _id: ObjectId('68df5d37bcb0a01d65cebeb1'),
+    name: 'Office Chair',
+    category: 'Furniture',
+    price: 120,
+    stock: 25
+  },
+  {
+    _id: ObjectId('68df5d37bcb0a01d65cebeb2'),
+    name: 'Headphones',
+    category: 'Accessories',
+    price: 60,
+    stock: 50
+  }
+]
+
+//View all indexes in the products collection.
+
+SampleStore> db.products.getIndexes()
+[
+  { v: 2, key: { _id: 1 }, name: '_id_' },
+  { v: 2, key: { category: 1 }, name: 'category_1' },
+  { v: 2, key: { price: -1 }, name: 'price_-1' }
+]
+
+//Remove the index on the category field when it's no longer needed.
+
+SampleStore> db.products.dropIndex({category : 1 })
+{ nIndexesWas: 3, ok: 1 }
+SampleStore> db.products.getIndexes()
+[
+  { v: 2, key: { _id: 1 }, name: '_id_' },
+  { v: 2, key: { price: -1 }, name: 'price_-1' }
+]
