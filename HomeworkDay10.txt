@@ -1,0 +1,21 @@
+// Export all student data into a .json file
+
+mashupdb> mongoexport --db=mashupdb --collection=students --out=all_students.json --jsonArray
+
+//Export only the _id, name, and mark fields into a .csv file.
+
+mongoexport --db=mashupdb --collection=students --type=csv --fields=_id,name,mark --out=students_selected.csv
+
+//Export only the first 4 records into a .json file.
+
+mongoexport --db=mashupdb --collection=students --limit=4 --out=first4.json --jsonArray
+
+//Export 3 records sorted by _id in ascending order into another .json file.
+
+mongoexport --db=mashupdb --collection=students --sort='{_id:1}' --limit=3 --out=sorted3.json --jsonArray
+
+//Export 6 records, skip the first 2, and sort by _id in ascending order.
+
+mongoexport --db=mashupdb --collection=students --sort='{_id:1}' --skip=2 --limit=6 --out=skip2_limit6.json --jsonArray
+
+
