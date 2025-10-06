@@ -1,0 +1,83 @@
+//A collection of student data in a MongoDB database named mashupdb. The collection is called students.
+
+test> use mashupdb
+switched to db mashupdb
+mashupdb> db.students.insertMany([
+...   { name: "Asha", age: 20, course: "BTech", mark: 85 },
+...   { name: "Ravi", age: 21, course: "BCA", mark: 78 },
+...   { name: "Sneha", age: 22, course: "BSc CS", mark: 92 },
+...   { name: "Kiran", age: 20, course: "BTech", mark: 67 },
+...   { name: "Meera", age: 23, course: "MCA", mark: 88 }
+... ])
+{
+  acknowledged: true,
+  insertedIds: {
+    '0': ObjectId('68e346e2330e80e6a2cebea4'),
+    '1': ObjectId('68e346e2330e80e6a2cebea5'),
+    '2': ObjectId('68e346e2330e80e6a2cebea6'),
+    '3': ObjectId('68e346e2330e80e6a2cebea7'),
+    '4': ObjectId('68e346e2330e80e6a2cebea8')
+  }
+}
+mashupdb> db.students.find()
+[
+  {
+    _id: ObjectId('68e346e2330e80e6a2cebea4'),
+    name: 'Asha',
+    age: 20,
+    course: 'BTech',
+    mark: 85
+  },
+  {
+    _id: ObjectId('68e346e2330e80e6a2cebea5'),
+    name: 'Ravi',
+    age: 21,
+    course: 'BCA',
+    mark: 78
+  },
+  {
+    _id: ObjectId('68e346e2330e80e6a2cebea6'),
+    name: 'Sneha',
+    age: 22,
+    course: 'BSc CS',
+    mark: 92
+  },
+  {
+    _id: ObjectId('68e346e2330e80e6a2cebea7'),
+    name: 'Kiran',
+    age: 20,
+    course: 'BTech',
+    mark: 67
+  },
+  {
+    _id: ObjectId('68e346e2330e80e6a2cebea8'),
+    name: 'Meera',
+    age: 23,
+    course: 'MCA',
+    mark: 88
+  }
+]
+
+//Create an index on the mark field in ascending order.
+
+mashupdb> db.students.createIndex({mark : 1})
+mark_1
+
+//Check which indexes currently exist on the students collection.
+
+mashupdb> db.students.getIndexes()
+[
+  { v: 2, key: { _id: 1 }, name: '_id_' },
+  { v: 2, key: { mark: 1 }, name: 'mark_1' }
+]
+
+//Remove the index on the mark field.
+
+mashupdb> db.students.dropIndex({mark: 1})
+{ nIndexesWas: 2, ok: 1 }
+mashupdb> db.students.getIndexes()
+[ { v: 2, key: { _id: 1 }, name: '_id_' } ]
+
+//Export the first 3 student records sorted by _id into a JSON file named sorted3.json
+
+mongoexport --db=mashupdb --collection=students --sort='{_id:1}' --limit=3 --out=sorted3.json --jsonArray
