@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>String Manipulation - Console Output</title>
+</head>
+<body>
+  <h2>Open your browser console to see the output!</h2>
+
+  <script>
+    // Create an object to hold data and method
+    const person = {
+      fullName: "  Sarah Johnson  ",
+      welcomeMsg: "   Welcome to the new platform! Hope you enjoy your stay.  ",
+
+      // Method to perform string operations and display results
+      displayDetails: function () {
+        const trimmedName = this.fullName.trim();
+        const trimmedMsg = this.welcomeMsg.trim();
+
+        console.log("---- STRING MANIPULATION RESULTS ----");
+
+        // 1. Display the first character of the full name
+        console.log("First character of full name:", trimmedName.charAt(0));
+
+        // 2. Show total number of characters in the welcome message
+        console.log("Total characters in welcome message:", trimmedMsg.length);
+
+        // 3. Display the first 15 characters using slice() and substring()
+        console.log("First 15 chars using slice():", trimmedMsg.slice(0, 15));
+        console.log("First 15 chars using substring():", trimmedMsg.substring(0, 15));
+
+        // 4. Convert full name to uppercase
+        console.log("Full name in uppercase:", trimmedName.toUpperCase());
+
+        // 5. Convert welcome message to lowercase
+        console.log("Welcome message in lowercase:", trimmedMsg.toLowerCase());
+
+        // 6. Trim extra spaces from the welcome message
+        console.log("Trimmed welcome message:", trimmedMsg);
+
+        // 7. Split the full name into an array
+        const nameParts = trimmedName.split(" ");
+        console.log("Split full name into array:", nameParts);
+
+        // 8. Find the position of the word "welcome" (case-insensitive)
+        const lowerMsg = trimmedMsg.toLowerCase();
+        const position = lowerMsg.indexOf("welcome");
+        console.log("Position of 'welcome' in message:", position);
+
+        // 9. Combine full name and welcome message
+        const combined = trimmedName + " - " + trimmedMsg;
+        console.log("Combined message:", combined);
+
+        console.log("---- END OF RESULTS ----");
+      },
+    };
+
+    //Call the object’s method to display formatted output using console.log()
+    person.displayDetails();
+  </script>
+</body>
+</html>
+
+/*
+
+---- STRING MANIPULATION RESULTS ----
+string.html:25 First character of full name: S
+string.html:28 Total characters in welcome message: 54
+string.html:31 First 15 chars using slice(): Welcome to the 
+string.html:32 First 15 chars using substring(): Welcome to the 
+string.html:35 Full name in uppercase: SARAH JOHNSON
+string.html:38 Welcome message in lowercase: welcome to the new platform! hope you enjoy your stay.
+string.html:41 Trimmed welcome message: Welcome to the new platform! Hope you enjoy your stay.
+string.html:45 Split full name into array: Array(2)
+string.html:50 Position of 'welcome' in message: 0
+string.html:54 Combined message: Sarah Johnson - Welcome to the new platform! Hope you enjoy your stay.
+string.html:56 ---- END OF RESULTS ----
+
+*/
